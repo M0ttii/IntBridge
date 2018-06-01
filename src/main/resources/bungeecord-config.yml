@@ -1,0 +1,21 @@
+#Set it to true if you have an own redis server
+use-own-redis-server: false
+redis:
+  host: localhost #Keep it at localhost if you don't have an own redis server
+  port: 6379
+  password: password
+
+execute-command: true
+  commands:
+    commmand: /kick [player]
+      points-to-have: 1
+    command: /ban
+
+staff-notify: true
+  #Use ";" to have multiple points
+  points: 3;4
+  permission: intave.notify
+  #Placeholders: [user], [points], [check], [server]
+  alert: §7Player §c[user] §7was flagged for §c[check]§7 on §c[server]. §7Please investigate.
+
+
