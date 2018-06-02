@@ -8,11 +8,16 @@ import redis.clients.jedis.JedisPubSub;
  */
 public class PubSubListener extends JedisPubSub {
 
-    public void onMessage(String channel, String message){
-        if(channel.equalsIgnoreCase("intave-point")){
-            String uuid = message.split(":")[0];
-            String pointstoadd = message.split(":")[0];
-            IntBridge.getInstance().getJedis().
+    public void onMessage(String channel, String message)
+    {
+        if(channel.equalsIgnoreCase("intave-point"))
+        {
+            final String[] responce = message.split(":");
+
+            final String uuid = responce[0];
+            final String pointstoadd = responce[1];
+
+
 
         }
     }
