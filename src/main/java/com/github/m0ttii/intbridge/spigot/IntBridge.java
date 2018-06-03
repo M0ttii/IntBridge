@@ -3,6 +3,7 @@ package com.github.m0ttii.intbridge.spigot;
 import com.github.m0ttii.intbridge.spigot.listener.IntaveListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import redis.clients.jedis.Jedis;
 
@@ -18,6 +19,8 @@ public class IntBridge extends JavaPlugin
 {
     @Getter private static IntBridge instance;
     @Getter Jedis jedis;
+    File file;
+    private FileConfiguration spigotconfig;
 
     public void onEnable()
     {
@@ -38,8 +41,10 @@ public class IntBridge extends JavaPlugin
     public void saveDefaultConfig()
     {
         final String configname = "spigot-config.yml";
-        if(!new File(getDataFolder(), configname).exists())
+        this.file = new File(getDataFolder(), configname);
+        if(!this.file.exists())
             saveResource(configname, false);
+        this.spigotconfig = YamlConfiguration.loadConfiguration(this.file);
     }
 
     private void connectToRedis(){
@@ -64,17 +69,10 @@ public class IntBridge extends JavaPlugin
         this.getJedis().publish("intave-violation", s);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 83616d7209ea4106a2ba72d8504c6bb58f1cd617
-=======
->>>>>>> 83616d7209ea4106a2ba72d8504c6bb58f1cd617
     @Override
-    public FileConfiguration getConfig()
-    {
+    public FileConfiguration getConfig() {
         // TODO This Method would return config.yml, but we need spigot-config.yml -> override getter
-        return super.getConfig();
+        return this.spigotconfig;
     }
 }
