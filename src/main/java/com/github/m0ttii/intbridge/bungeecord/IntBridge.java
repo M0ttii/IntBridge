@@ -1,5 +1,6 @@
 package com.github.m0ttii.intbridge.bungeecord;
 
+import com.github.m0ttii.intbridge.bungeecord.listener.PubSubListener;
 import com.github.m0ttii.intbridge.bungeecord.utils.Configuration;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
@@ -25,6 +26,7 @@ public class IntBridge extends Plugin
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
         setUpRedis();
+        new PubSubListener();
     }
 
     public void onDisable()
