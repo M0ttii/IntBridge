@@ -1,17 +1,11 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
-import com.github.m0ttii.intbridge.bungeecord.utils.Configuration;
 import redis.clients.jedis.Jedis;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -40,9 +34,16 @@ public class ViolationManager
 
     public Stream<String> getCommands(final int oldVL, final int newVL)
     {
-        return IntStream.range(oldVL,newVL + 1).boxed()
+        final AtomicReference<Stream<String>> g = new AtomicReference<>(Stream.empty());
+
+        IntStream.range(oldVL + 1, newVL + 1).boxed()
                 .filter(this::hasCommand)
-                .map(this::getCommandsAt).findFirst().get();
+                .map(this::getCommandsAt)
+                .distinct()
+                .collect(Collectors.toList())
+                .forEach(f -> g.set(Stream.concat(g.get(), f)));
+
+        return g.get();
     }
 
     private boolean hasCommand(final int vl)
