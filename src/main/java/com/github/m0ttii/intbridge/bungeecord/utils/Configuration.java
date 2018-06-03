@@ -44,13 +44,4 @@ public class Configuration {
         }
     }
 
-    public static Configuration getConfiguration()
-    {
-        return configuration;
-    }
-
-    public net.md_5.bungee.config.Configuration getConfig()
-    {
-        return config;
-    }
 }
