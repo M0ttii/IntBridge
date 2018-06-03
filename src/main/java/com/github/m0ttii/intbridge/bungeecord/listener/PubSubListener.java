@@ -20,8 +20,11 @@ public class PubSubListener {
         jSubscriber.subscribe(new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
-                final String uuid = message.split(":")[0];
-                final Integer violation = Integer.valueOf(message.split(":")[1]);
+                final String[] args = message.split(":");
+
+                final String uuid = args[0];
+                final Integer violation = Integer.valueOf(args[1]);
+
                 final Stream<String> command = ViolationManager
                         .getCommands(ViolationManager.getViolation(UUID.fromString(uuid)), ViolationManager.getViolation(UUID.fromString(uuid)) + violation);
 

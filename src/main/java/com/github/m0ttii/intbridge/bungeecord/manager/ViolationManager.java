@@ -12,8 +12,8 @@ import java.util.stream.Stream;
 /**
  * Created by Adrian D. on 03.06.2018.
  */
-public class ViolationManager {
-    Jedis jedis;
+public class ViolationManager
+{
     public static void addViolation(UUID uuid, Integer violation)
     {
         IntBridge.getInstance().getJedis().set(uuid.toString(),String.valueOf(getViolation(uuid) + violation));
