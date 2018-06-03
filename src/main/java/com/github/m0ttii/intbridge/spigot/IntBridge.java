@@ -72,7 +72,6 @@ public class IntBridge extends JavaPlugin
 
     @Override
     public FileConfiguration getConfig() {
-        // TODO This Method would return config.yml, but we need spigot-config.yml -> override getter
         return this.spigotconfig;
     }
 }

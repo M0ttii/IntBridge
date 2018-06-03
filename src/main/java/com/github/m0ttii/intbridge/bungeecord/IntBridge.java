@@ -46,4 +46,9 @@ public class IntBridge extends Plugin
         this.jedis = new Jedis(Configuration.getConfiguration().getConfig().getString("redis.host"), Configuration.getConfiguration().getConfig().getInt("redis.port"));
         this.jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
     }
+
+    public net.md_5.bungee.config.Configuration getConfig()
+    {
+        return Configuration.getConfiguration().getConfig();
+    }
 }
