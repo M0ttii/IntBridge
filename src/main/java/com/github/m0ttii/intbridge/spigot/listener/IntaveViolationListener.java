@@ -1,6 +1,6 @@
 package com.github.m0ttii.intbridge.spigot.listener;
 
-import com.github.m0ttii.intbridge.spigot.IntBridge;
+import com.github.m0ttii.intbridge.bungeecord.IntBridge;
 import de.jpx3.intave.api.external.linked.event.AsyncIntaveViolationEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,4 +22,6 @@ public class IntaveViolationListener implements Listener {
 
         IntBridge.getInstance().getJedis().publish("intave-violation", message);
     }
+
+
 }

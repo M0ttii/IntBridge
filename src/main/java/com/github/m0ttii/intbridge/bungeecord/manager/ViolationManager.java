@@ -10,9 +10,7 @@ import java.util.UUID;
  * Created by Adrian D. on 03.06.2018.
  */
 public class ViolationManager {
-    Jedis jedis;
-
-
+    /*Jedis jedis;
 
     private void addViolation(UUID uuid, Integer violation){
         this.jedis = new IntBridge().getJedis();
@@ -41,5 +39,5 @@ public class ViolationManager {
             if()
         });
 
-    }
+    }*/
 }
