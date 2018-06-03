@@ -6,10 +6,9 @@ redis:
   password: password
 
 execute-command: true
-  commands:
-    commmand: /kick [player]
-      points-to-have: 1
-    command: /ban
+commands:
+  - 2;/kick [player] [reason]
+  - 3;/ban [player] [reason]
 
 staff-notify: true
   #Use ";" to have multiple points

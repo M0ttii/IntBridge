@@ -37,5 +37,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.20" level="project" />
     <orderEntry type="library" name="Maven: com.github.kstyrc:embedded-redis:0.6" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
+    <orderEntry type="library" name="Intave_AntiCheat_12.4.4-API" level="project" />
   </component>
 </module>
