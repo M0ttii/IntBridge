@@ -47,5 +47,6 @@ public class Configuration {
         {
             e.printStackTrace();
         }
+        configuration = this;
     }
 }
