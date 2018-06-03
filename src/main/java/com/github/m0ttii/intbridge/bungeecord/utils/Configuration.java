@@ -11,11 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7fd7b3232a0d8333f307da6426be35ffccbd1d81
 /**
  * Created by Adrian D. on 01.06.2018.
  */
@@ -41,14 +36,9 @@ public class Configuration {
             File file = new File(IntBridge.getInstance().getDataFolder(), "config.yml");
 
 
-<<<<<<< HEAD
-        if (!file.exists()) {
-            try (InputStream in = IntBridge.getInstance().getResourceAsStream("bungeecord-config.yml")) {
-=======
             if (!file.exists())
             {
                 InputStream in = IntBridge.getInstance().getResourceAsStream("bungeecord-config.yml");
->>>>>>> 7fd7b3232a0d8333f307da6426be35ffccbd1d81
                 Files.copy(in, file.toPath());
                 in.close();
             }
@@ -58,5 +48,4 @@ public class Configuration {
             e.printStackTrace();
         }
     }
-
 }

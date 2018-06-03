@@ -2,7 +2,6 @@ package com.github.m0ttii.intbridge.spigot.listener;
 
 import com.github.m0ttii.intbridge.spigot.IntBridge;
 import com.github.m0ttii.intbridge.spigot.utils.ConfigHelper;
-import de.jpx3.intave.api.external.linked.event.AsyncIntaveCommandTriggerEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class IntaveListener implements Listener
 {
-    @EventHandler
+    /*@EventHandler
     public void on(final AsyncIntaveCommandTriggerEvent e)
     {
         final Player p = e.getPlayer();
@@ -54,5 +53,5 @@ public class IntaveListener implements Listener
             if(!executeCommand)
                 e.setCancelled(true);
         }
-    }
+    }*/
 }
