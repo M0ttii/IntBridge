@@ -41,7 +41,8 @@ public class ViolationManager
     public Stream<String> getCommands(final int oldVL, final int newVL)
     {
         return IntStream.range(oldVL,newVL + 1).boxed()
-                .filter(this::hasCommand).map(this::getCommandsAt).findFirst().get();
+                .filter(this::hasCommand)
+                .map(this::getCommandsAt).findFirst().get();
     }
 
     private boolean hasCommand(final int vl)
