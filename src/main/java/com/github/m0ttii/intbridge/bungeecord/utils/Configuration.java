@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-import static com.sun.org.apache.xerces.internal.utils.SecuritySupport.getResourceAsStream;
-
 /**
  * Created by Adrian D. on 01.06.2018.
  */
@@ -25,22 +23,29 @@ public class Configuration {
     private static Configuration configuration;
 
 
-    public Configuration() throws IOException {
-        this.file = new File(IntBridge.getInstance().getDataFolder(), "bungeecord-config.yml");
-        this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
+    public Configuration()
+    {
+        try
+        {
+            this.file = new File(IntBridge.getInstance().getDataFolder(), "bungeecord-config.yml");
+            this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
 
-        if (!IntBridge.getInstance().getDataFolder().exists())
-            IntBridge.getInstance().getDataFolder().mkdir();
+            if (!IntBridge.getInstance().getDataFolder().exists())
+                IntBridge.getInstance().getDataFolder().mkdir();
 
-        File file = new File(IntBridge.getInstance().getDataFolder(), "config.yml");
+            File file = new File(IntBridge.getInstance().getDataFolder(), "config.yml");
 
 
-        if (!file.exists()) {
-            try (InputStream in = getResourceAsStream("bungeecord-config.yml")) {
+            if (!file.exists())
+            {
+                InputStream in = IntBridge.getInstance().getResourceAsStream("bungeecord-config.yml");
                 Files.copy(in, file.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
+                in.close();
             }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 
