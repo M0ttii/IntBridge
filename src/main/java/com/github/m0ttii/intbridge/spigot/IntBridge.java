@@ -8,13 +8,17 @@ import redis.clients.jedis.Jedis;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.io.File;
+
 
 /**
  * Created by Adrian D. on 01.06.2018.
  */
-public class IntBridge extends JavaPlugin {
+public class IntBridge extends JavaPlugin
+{
     @Getter private static IntBridge instance;
     @Getter Jedis jedis;
+
     public void onEnable()
     {
         instance = this;
@@ -28,6 +32,14 @@ public class IntBridge extends JavaPlugin {
     public void onDisable()
     {
 
+    }
+
+    @Override
+    public void saveDefaultConfig()
+    {
+        final String configname = "spigot-config.yml";
+        if(!new File(getDataFolder(), configname).exists())
+            saveResource(configname, false);
     }
 
     private void connectToRedis(){
@@ -50,11 +62,6 @@ public class IntBridge extends JavaPlugin {
     public void transferStringToBungee(final String s)
     {
         // TODO Transfer String s to bungeecord
-    }
-
-    public static IntBridge getInstance()
-    {
-        return instance;
     }
 
     @Override

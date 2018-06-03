@@ -13,37 +13,19 @@ public class ViolationManager
 {
     Jedis jedis;
 
-    private void addViolation(UUID uuid, Integer violation)
+    public void addViolation(UUID uuid, Integer violation)
     {
-        this.jedis = new IntBridge().getJedis();
+        this.jedis = IntBridge.getInstance().getJedis();
 
         jedis.append(uuid.toString(), String.valueOf(violation));
     }
 
-    private String getViolation(UUID uuid){
-        this.jedis = new IntBridge().getJedis();
-
-        if(jedis.exists(uuid.toString())){
-            return jedis.get(uuid.toString());
-        }
-        return null;
-
-    }
-
-    private String getCommand(UUID uuid)
+    public Integer getViolation(UUID uuid)
     {
-        if(getViolation(uuid) == null)
-        {
-            return "";
-        }
+        this.jedis = IntBridge.getInstance().getJedis();
+        if(jedis.exists(uuid.toString()))
+            return Integer.parseInt(jedis.get(uuid.toString()));
 
-        Integer violation = Integer.valueOf(getViolation(uuid));
-        Configuration.getConfiguration().getConfig().getStringList("commands").forEach(s -> {
-            Integer neededViolation = Integer.valueOf(s.split(";")[0]);
-            String string = Configuration.getConfiguration().getConfig().getStringList("commands").iterator().next();
-
-        });
-
-        return "";
+        return 0;
     }
 }
