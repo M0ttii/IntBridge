@@ -33,8 +33,8 @@ public class IntaveListener implements Listener
         if(isKick)
         {
             final String[] args = unparsedCommand.split(" ");
-            final String playername = args[1];
-            final UUID playeruuid = Bukkit.getOfflinePlayer(playername).getUniqueId();
+            final String playername = p.getName();
+            final UUID playeruuid = p.getUniqueId();
             final StringBuilder reason = new StringBuilder();
 
             for (int i = 1; args.length > i; i++)

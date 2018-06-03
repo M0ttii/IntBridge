@@ -6,54 +6,44 @@ import net.md_5.bungee.api.plugin.Plugin;
 import redis.clients.jedis.Jedis;
 import redis.embedded.RedisServer;
 
-import java.io.IOException;
-
 
 /**
  * Created by Adrian D. on 01.06.2018.
  */
-public class IntBridge extends Plugin {
-    @Getter
-    Jedis jedis;
+public class IntBridge extends Plugin
+{
+    @Getter Jedis jedis;
     RedisServer redisServer;
 
     @Getter
     private static IntBridge instance;
 
-    public void onEnable() {
+    public void onEnable()
+    {
         instance = this;
-        if (!getDataFolder().exists())
+        if(!getDataFolder().exists())
             getDataFolder().mkdir();
         setUpRedis();
     }
 
-    public void onDisable() {
+    public void onDisable()
+    {
         this.redisServer.stop();
     }
 
-
-    private void init() throws IOException {
-        setUpRedis();
-        new Configuration();
-    }
-
-
-    private void setUpRedis() {
-        if (!Configuration.getConfiguration().getConfig().getBoolean("use-own-redis-server")) {
+    private void setUpRedis()
+    {
+        if(!Configuration.getConfiguration().getConfig().getBoolean("use-own-redis-server"))
+        {
             this.jedis = new Jedis("localhost", Configuration.getConfiguration().getConfig().getInt("redis.port"));
-            String authString = jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
-            if (!authString.equals("OK")) {
-                System.err.println("IntBridge: Redis Auth failed. Wrong password.");
-                return;
-            }
-            this.jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
-        }
-        this.jedis = new Jedis(Configuration.getConfiguration().getConfig().getString("redis.host"), Configuration.getConfiguration().getConfig().getInt("redis.port"));
-        String authString = jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
-        if (!authString.equals("OK")) {
-            System.err.println("IntBridge: Redis Auth failed. Wrong password.");
             return;
         }
+        this.redisServer = RedisServer.builder()
+            .port(Configuration.getConfiguration().getConfig().getInt("redis.port"))
+            .setting("masterauth " + Configuration.getConfiguration().getConfig().getString("redis.password"))
+            .build();
+        this.redisServer.start();
+        this.jedis = new Jedis(Configuration.getConfiguration().getConfig().getString("redis.host"), Configuration.getConfiguration().getConfig().getInt("redis.port"));
         this.jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
     }
 }

@@ -9,10 +9,12 @@ import java.util.UUID;
 /**
  * Created by Adrian D. on 03.06.2018.
  */
-public class ViolationManager {
-    /*Jedis jedis;
+public class ViolationManager
+{
+    Jedis jedis;
 
-    private void addViolation(UUID uuid, Integer violation){
+    private void addViolation(UUID uuid, Integer violation)
+    {
         this.jedis = new IntBridge().getJedis();
 
         jedis.append(uuid.toString(), String.valueOf(violation));
@@ -28,16 +30,20 @@ public class ViolationManager {
 
     }
 
-    private String getCommand(UUID uuid){
-        if(getViolation(uuid) == null){
-            return null;
+    private String getCommand(UUID uuid)
+    {
+        if(getViolation(uuid) == null)
+        {
+            return "";
         }
+
         Integer violation = Integer.valueOf(getViolation(uuid));
         Configuration.getConfiguration().getConfig().getStringList("commands").forEach(s -> {
             Integer neededViolation = Integer.valueOf(s.split(";")[0]);
             String string = Configuration.getConfiguration().getConfig().getStringList("commands").iterator().next();
-            if()
+
         });
 
-    }*/
+        return "";
+    }
 }

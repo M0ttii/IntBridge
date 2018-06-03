@@ -6,9 +6,10 @@ import redis.clients.jedis.JedisPubSub;
 /**
  * Created by Adrian D. on 01.06.2018.
  */
-public class PubSubListener{
-
-    public PubSubListener(){
+public class PubSubListener
+{
+    public PubSubListener()
+    {
         Jedis jSubscriber = new Jedis();
         jSubscriber.subscribe(new JedisPubSub() {
             @Override
