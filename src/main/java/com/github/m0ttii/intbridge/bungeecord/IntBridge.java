@@ -2,6 +2,7 @@ package com.github.m0ttii.intbridge.bungeecord;
 
 import com.github.m0ttii.intbridge.bungeecord.utils.Configuration;
 import lombok.Getter;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import redis.clients.jedis.Jedis;
 import redis.embedded.RedisServer;

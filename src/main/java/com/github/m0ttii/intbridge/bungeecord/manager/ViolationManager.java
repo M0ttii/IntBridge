@@ -36,7 +36,9 @@ public class ViolationManager
     {
         final AtomicReference<Stream<String>> g = new AtomicReference<>(Stream.empty());
 
-        IntStream.range(oldVL + 1, newVL + 1).boxed()
+        IntStream
+                .rangeClosed(oldVL + 1, newVL)
+                .boxed()
                 .filter(this::hasCommand)
                 .map(this::getCommandsAt)
                 .distinct()
@@ -48,21 +50,21 @@ public class ViolationManager
 
     private boolean hasCommand(final int vl)
     {
-        return IntBridge.getInstance().getConfig().getSection("pointcommands").contains(vl + "");
+        return IntBridge.getInstance().getConfig().getSection("pointcommands").contains(String.valueOf(vl));
     }
 
     private Stream<String> getCommandsAt(final int vl)
     {
         net.md_5.bungee.config.Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
-        if(g.contains(vl + ""))
+        if(g.contains(String.valueOf(vl)))
         {
-            if(g.getString(vl + "","").length() < 2)
+            if(g.getString(String.valueOf(vl),"").length() < 2)
             {
-                return g.getStringList(vl + "").stream();
+                return g.getStringList(String.valueOf(vl)).stream();
             }
             else
             {
-                return Stream.of(g.getString(vl + ""));
+                return Stream.of(g.getString(String.valueOf(vl)));
             }
         }
         else
