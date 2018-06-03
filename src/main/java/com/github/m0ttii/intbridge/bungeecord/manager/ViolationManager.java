@@ -1,18 +1,16 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
+<<<<<<< HEAD
 import com.github.m0ttii.intbridge.bungeecord.utils.Configuration;
 import lombok.Getter;
+=======
+>>>>>>> dbad2d7a419a695436bcdb1bca7055c552142bf3
 import redis.clients.jedis.Jedis;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -41,28 +39,37 @@ public class ViolationManager {
 
     public Stream<String> getCommands(final int oldVL, final int newVL)
     {
-        return IntStream.range(oldVL,newVL + 1).boxed()
+        final AtomicReference<Stream<String>> g = new AtomicReference<>(Stream.empty());
+
+        IntStream
+                .rangeClosed(oldVL + 1, newVL)
+                .boxed()
                 .filter(this::hasCommand)
-                .map(this::getCommandsAt).findFirst().get();
+                .map(this::getCommandsAt)
+                .distinct()
+                .collect(Collectors.toList())
+                .forEach(f -> g.set(Stream.concat(g.get(), f)));
+
+        return g.get();
     }
 
     private boolean hasCommand(final int vl)
     {
-        return IntBridge.getInstance().getConfig().getSection("pointcommands").contains(vl + "");
+        return IntBridge.getInstance().getConfig().getSection("pointcommands").contains(String.valueOf(vl));
     }
 
     private Stream<String> getCommandsAt(final int vl)
     {
         net.md_5.bungee.config.Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
-        if(g.contains(vl + ""))
+        if(g.contains(String.valueOf(vl)))
         {
-            if(g.getString(vl + "","").length() < 2)
+            if(g.getString(String.valueOf(vl),"").length() < 2)
             {
-                return g.getStringList(vl + "").stream();
+                return g.getStringList(String.valueOf(vl)).stream();
             }
             else
             {
-                return Stream.of(g.getString(vl + ""));
+                return Stream.of(g.getString(String.valueOf(vl)));
             }
         }
         else
