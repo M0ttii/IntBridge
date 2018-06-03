@@ -15,7 +15,7 @@ public class ViolationManager
 {
     public static void addViolation(UUID uuid, Integer violation)
     {
-        IntBridge.getInstance().getJedis().append(uuid.toString(), String.valueOf(violation));
+        IntBridge.getInstance().getJedis().set(uuid.toString(),String.valueOf(getViolation(uuid) + violation));
     }
 
     public static Integer getViolation(UUID uuid)
@@ -51,19 +51,11 @@ public class ViolationManager
     {
         net.md_5.bungee.config.Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
         if(g.contains(String.valueOf(vl)))
-        {
-            if(g.getString(String.valueOf(vl),"").length() < 2)
-            {
+            if (g.getString(String.valueOf(vl), "").length() < 2)
                 return g.getStringList(String.valueOf(vl)).stream();
-            }
             else
-            {
                 return Stream.of(g.getString(String.valueOf(vl)));
-            }
-        }
         else
-        {
             return Stream.of("");
-        }
     }
 }
