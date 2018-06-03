@@ -9,6 +9,7 @@ import redis.clients.jedis.JedisPubSub;
  */
 public class PubSubListener{
 
+<<<<<<< HEAD
     public PubSubListener(){
         Jedis jSubscriber = new Jedis();
         jSubscriber.subscribe(new JedisPubSub() {
@@ -17,6 +18,20 @@ public class PubSubListener{
                 // violation actions
             }
         }, "intave-violation");
+=======
+    public void onMessage(String channel, String message)
+    {
+        if(channel.equalsIgnoreCase("intave-point"))
+        {
+            final String[] responce = message.split(":");
+
+            final String uuid = responce[0];
+            final String pointstoadd = responce[1];
+
+
+
+        }
+>>>>>>> f40385271311cf89216c4782e58011cf4b7062da
     }
 
 

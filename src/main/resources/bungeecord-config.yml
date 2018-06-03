@@ -5,16 +5,18 @@ redis:
   port: 6379
   password: password
 
+<<<<<<< HEAD
 execute-command: true
 commands:
   - 2;/kick [player] [reason]
   - 3;/ban [player] [reason]
+=======
+pointcommands:
+  5: "intbridge adminnotify §7Player §c[player] §7is suspected for §cCheating§7 on §c[server]. §7Please investigate."
+  10:
+    - "intbridge adminnotify §7Player §c[player] §7was banned for §cCheating§7 on §c[server]."
+    - "ban [player] Hacking"
+>>>>>>> f40385271311cf89216c4782e58011cf4b7062da
 
 staff-notify: true
-  #Use ";" to have multiple points
-  points: 3;4
-  permission: intave.notify
-  #Placeholders: [user], [points], [check], [server]
-  alert: §7Player §c[user] §7was flagged for §c[check]§7 on §c[server]. §7Please investigate.
-
-
+permission: intave.notify

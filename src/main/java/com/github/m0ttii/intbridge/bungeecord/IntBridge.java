@@ -16,20 +16,23 @@ public class IntBridge extends Plugin {
     @Getter Jedis jedis;
     RedisServer redisServer;
 
-   @Getter
-   private static IntBridge instance;
+    @Getter
+    private static IntBridge instance;
 
-
-
-    public void onEnable(){
-
+    public void onEnable()
+    {
+        instance = this;
+        if(!getDataFolder().exists())
+            getDataFolder().mkdir();
+        setUpRedis();
     }
 
-
-    public void onDisable(){
+    public void onDisable()
+    {
         this.redisServer.stop();
     }
 
+<<<<<<< HEAD
     private void init() throws IOException {
         setUpRedis();
         new Configuration();
@@ -45,6 +48,12 @@ public class IntBridge extends Plugin {
                     .build();
             this.redisServer.start();
             //Connect to Redis
+=======
+    private void setUpRedis()
+    {
+        if(!Configuration.getConfiguration().getConfig().getBoolean("use-own-redis-server"))
+        {
+>>>>>>> f40385271311cf89216c4782e58011cf4b7062da
             this.jedis = new Jedis("localhost", Configuration.getConfiguration().getConfig().getInt("redis.port"));
             String authString = jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
             if (!authString.equals("OK"))
@@ -62,5 +71,15 @@ public class IntBridge extends Plugin {
             return;
         }
         this.jedis.auth(Configuration.getConfiguration().getConfig().getString("redis.password"));
+    }
+
+    public static IntBridge getInstance()
+    {
+        return instance;
+    }
+
+    public Jedis getJedis()
+    {
+        return jedis;
     }
 }
