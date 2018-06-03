@@ -32,8 +32,8 @@ public class IntBridge extends JavaPlugin
         initListeners();
     }
 
-    public void onDisable()
-    {
+    public void onDisable() {
+        this.jedis.quit();
 
     }
 

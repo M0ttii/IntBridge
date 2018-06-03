@@ -30,6 +30,7 @@ public class IntBridge extends Plugin
     public void onDisable()
     {
         this.redisServer.stop();
+        this.jedis.quit();
     }
 
     private void setUpRedis()
