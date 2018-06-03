@@ -65,7 +65,10 @@ public class IntBridge extends JavaPlugin
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 83616d7209ea4106a2ba72d8504c6bb58f1cd617
 =======
 >>>>>>> 83616d7209ea4106a2ba72d8504c6bb58f1cd617
     @Override
