@@ -1,7 +1,10 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
+<<<<<<< HEAD
 import redis.clients.jedis.Jedis;
+=======
+>>>>>>> 655c18035f2f282391cdc1cbd040e837883bd040
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -12,11 +15,16 @@ import java.util.stream.Stream;
 /**
  * Created by Adrian D. on 03.06.2018.
  */
+<<<<<<< HEAD
 public class ViolationManager {
     Jedis jedis;
+=======
+public class ViolationManager
+{
+>>>>>>> 655c18035f2f282391cdc1cbd040e837883bd040
     public static void addViolation(UUID uuid, Integer violation)
     {
-        IntBridge.getInstance().getJedis().append(uuid.toString(), String.valueOf(violation));
+        IntBridge.getInstance().getJedis().set(uuid.toString(),String.valueOf(getViolation(uuid) + violation));
     }
 
     public static Integer getViolation(UUID uuid)
@@ -52,19 +60,11 @@ public class ViolationManager {
     {
         net.md_5.bungee.config.Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
         if(g.contains(String.valueOf(vl)))
-        {
-            if(g.getString(String.valueOf(vl),"").length() < 2)
-            {
+            if (g.getString(String.valueOf(vl), "").length() < 2)
                 return g.getStringList(String.valueOf(vl)).stream();
-            }
             else
-            {
                 return Stream.of(g.getString(String.valueOf(vl)));
-            }
-        }
         else
-        {
             return Stream.of("");
-        }
     }
 }
