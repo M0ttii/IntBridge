@@ -21,12 +21,14 @@ public class PubSubListener
             public void onMessage(String channel, String message) {
                 final String uuid = message.split(":")[0];
                 final Integer violation = Integer.valueOf(message.split(":")[1]);
-                final Stream<String> command = ViolationManager.getInstance()
-                        .getCommands(ViolationManager.getInstance().getViolation(UUID.fromString(uuid)), ViolationManager.getInstance().getViolation(UUID.fromString(uuid)) + violation);
+                final Stream<String> command = ViolationManager
+                        .getCommands(ViolationManager.getViolation(UUID.fromString(uuid)), ViolationManager.getViolation(UUID.fromString(uuid)) + violation);
 
                 command.forEachOrdered(s ->
                     ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), s)
                 );
+                ViolationManager.addViolation(UUID.fromString(uuid), ViolationManager.getViolation(UUID.fromString(uuid)) + violation);
+
             }
         }, "intave-violation");
     }
