@@ -25,6 +25,7 @@ public class IntBridge extends Plugin
         instance = this;
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
+        new Configuration();
         setUpRedis();
         new PubSubListener();
     }
