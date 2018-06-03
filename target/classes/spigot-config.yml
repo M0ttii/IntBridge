@@ -1,0 +1,36 @@
+#Set it to true if you have enabled redis on your bungeecord server
+use-redis: false
+redis:
+  host: localhost
+  port: 6379
+  authentication: password
+
+# Turn this on to get the player kicked
+execute-command: false
+
+# This option will run the command "/intave resetvl [player]", in order to refresh the violation level (recommended)
+clear-intave-vl: true
+
+# Map of kick-reasons to added points.
+# scoring 10 will auto-ban by default
+points:
+  'Moved wrongly': 0
+  'Moved too quickly': 0
+  'Illegal movement data': 4
+  'Desyncronized': 0
+  'Weird knockback': 0
+  'Killaura-like fight': 5
+  'Illegal attacks': 8
+  'Suspicious combat behavior': 3
+  'Unexpected hits (Lag?)': 0
+  'Moved incorrectly': 4
+  'Suspicious actions': 0
+  'Suspicious block-placements': 5
+  'Illegal packets': 10
+  'Invalid abilities': 0
+  'Clicked too fast': 0
+  'Shot arrows too quickly': 9
+  'Unexpected hits': 10
+  'Unacceptable messages': 0
+  'Rotated illegally': 10
+  'Skinblink': 1

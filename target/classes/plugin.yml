@@ -1,0 +1,4 @@
+name: IntBridge
+vesion: 1.0
+authors: [M0ttii, Jpx3]
+main: com.github.m0ttii.intbridge.spigot.IntBridge
