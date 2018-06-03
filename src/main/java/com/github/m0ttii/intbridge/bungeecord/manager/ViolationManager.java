@@ -1,10 +1,7 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
-<<<<<<< HEAD
 import redis.clients.jedis.Jedis;
-=======
->>>>>>> 655c18035f2f282391cdc1cbd040e837883bd040
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -15,13 +12,8 @@ import java.util.stream.Stream;
 /**
  * Created by Adrian D. on 03.06.2018.
  */
-<<<<<<< HEAD
 public class ViolationManager {
     Jedis jedis;
-=======
-public class ViolationManager
-{
->>>>>>> 655c18035f2f282391cdc1cbd040e837883bd040
     public static void addViolation(UUID uuid, Integer violation)
     {
         IntBridge.getInstance().getJedis().set(uuid.toString(),String.valueOf(getViolation(uuid) + violation));
