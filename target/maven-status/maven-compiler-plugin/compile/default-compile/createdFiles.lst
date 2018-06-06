@@ -1,8 +1,0 @@
-com\github\m0ttii\intbridge\spigot\utils\ConfigHelper.class
-com\github\m0ttii\intbridge\bungeecord\listener\PubSubListener.class
-com\github\m0ttii\intbridge\bungeecord\IntBridge.class
-com\github\m0ttii\intbridge\bungeecord\utils\Configuration.class
-com\github\m0ttii\intbridge\bungeecord\manager\ViolationManager.class
-com\github\m0ttii\intbridge\spigot\IntBridge.class
-com\github\m0ttii\intbridge\spigot\listener\IntaveListener.class
-com\github\m0ttii\intbridge\bungeecord\listener\PubSubListener$1.class

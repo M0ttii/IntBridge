@@ -1,8 +1,8 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
-import redis.clients.jedis.Jedis;
 
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -12,17 +12,18 @@ import java.util.stream.Stream;
 /**
  * Created by Adrian D. on 03.06.2018.
  */
-public class ViolationManager
-{
+public class ViolationManager {
+    public static HashMap<UUID, Integer> violationmap = new HashMap<UUID, Integer>;
+
     public static void addViolation(UUID uuid, Integer violation)
     {
-        IntBridge.getInstance().getJedis().set(uuid.toString(),String.valueOf(getViolation(uuid) + violation));
+        violationmap.put(uuid, violation);
     }
 
-    public static Integer getViolation(UUID uuid)
+    public static int getViolation(UUID uuid)
     {
-        if(IntBridge.getInstance().getJedis().exists(uuid.toString()))
-            return Integer.parseInt(IntBridge.getInstance().getJedis().get(uuid.toString()));
+        if(violationmap.containsKey(uuid)){
+            return Integer.parseInt(String.valueOf(violationmap.get(uuid)));
 
         return 0;
     }

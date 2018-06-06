@@ -1,11 +1,12 @@
 package com.github.m0ttii.intbridge.spigot;
 
 import com.github.m0ttii.intbridge.spigot.listener.IntaveListener;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import redis.clients.jedis.Jedis;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -15,10 +16,8 @@ import java.io.File;
 /**
  * Created by Adrian D. on 01.06.2018.
  */
-public class IntBridge extends JavaPlugin
-{
+public class IntBridge extends JavaPlugin{
     @Getter private static IntBridge instance;
-    @Getter Jedis jedis;
     File file;
     private FileConfiguration spigotconfig;
 
@@ -28,12 +27,10 @@ public class IntBridge extends JavaPlugin
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
         saveDefaultConfig();
-        connectToRedis();
         initListeners();
     }
 
     public void onDisable() {
-        this.jedis.quit();
 
     }
 
@@ -47,26 +44,18 @@ public class IntBridge extends JavaPlugin
         this.spigotconfig = YamlConfiguration.loadConfiguration(this.file);
     }
 
-    private void connectToRedis(){
-        this.jedis = new Jedis(getConfig().getString("redis.host"), getConfig().getInt("redis.port"));
-        String authString = jedis.auth(getConfig().getString("redis.password"));
-        if (!authString.equals("OK"))
-        {
-            System.err.println("IntBridge: Redis Auth failed. Wrong password.");
-            Bukkit.shutdown();
-            return;
-        }
-        this.jedis.auth(getConfig().getString("redis.password"));
-    }
 
     private void initListeners()
     {
         getServer().getPluginManager().registerEvents(new IntaveListener(),this);
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
-    public void transferStringToBungee(final String s)
+    public void transferStringToBungee(final Player player, final String string)
     {
-        this.getJedis().publish("intave-violation", s);
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF(string);
+        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
     }
 
 
