@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class IntaveListener implements Listener
 {
-    /*@EventHandler
+    @EventHandler
     public void on(final AsyncIntaveCommandTriggerEvent e)
     {
         final Player p = e.getPlayer();
@@ -53,5 +53,5 @@ public class IntaveListener implements Listener
             if(!executeCommand)
                 e.setCancelled(true);
         }
-    }*/
+    }
 }
