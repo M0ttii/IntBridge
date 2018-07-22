@@ -18,7 +18,11 @@ import java.util.stream.Collectors;
 public class IntaveListener implements Listener
 {
     @EventHandler
+<<<<<<< HEAD
     public void on(final AsyncIntaveCommandTriggerEvent event)
+=======
+    public void on(final AsyncIntaveCommandTriggerEvent e)
+>>>>>>> bd49e162d30be782d0c2fc71aae4c6f26fdba991
     {
         final Player p = event.getPlayer();
         String unparsedCommand = event.getCommand();
