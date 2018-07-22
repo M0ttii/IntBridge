@@ -1,10 +1,3 @@
-#Set it to true if you have an own redis server
-use-own-redis-server: false
-redis:
-  host: localhost #Keep it at localhost if you don't have an own redis server
-  port: 6379
-  password: password
-
 pointcommands:
   5: "intbridge adminnotify §7Player §c[player] §7is suspected for §cCheating§7 on §c[server]. §7Please investigate."
   10:

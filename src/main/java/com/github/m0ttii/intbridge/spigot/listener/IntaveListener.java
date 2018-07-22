@@ -2,6 +2,7 @@ package com.github.m0ttii.intbridge.spigot.listener;
 
 import com.github.m0ttii.intbridge.spigot.IntBridge;
 import com.github.m0ttii.intbridge.spigot.utils.ConfigHelper;
+import de.jpx3.intave.api.external.linked.event.AsyncIntaveCommandTriggerEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,11 +17,11 @@ import java.util.stream.Collectors;
 
 public class IntaveListener implements Listener
 {
-    /*@EventHandler
-    public void on(final AsyncIntaveCommandTriggerEvent e)
+    @EventHandler
+    public void on(final AsyncIntaveCommandTriggerEvent event)
     {
-        final Player p = e.getPlayer();
-        String unparsedCommand = e.getCommand();
+        final Player p = event.getPlayer();
+        String unparsedCommand = event.getCommand();
 
         if(unparsedCommand.startsWith("/"))
             unparsedCommand = unparsedCommand.replaceFirst("/", "");
@@ -44,14 +45,14 @@ public class IntaveListener implements Listener
 
             if(foundReason.length() > 1)
             {
-                final String data = playeruuid.toString() + ":" + ConfigHelper.getPointsForKickReason(IntBridge.getInstance().getConfig(),foundReason);
-                IntBridge.getInstance().transferStringToBungee(data);
+                final String data = String.valueOf(ConfigHelper.getPointsForKickReason(IntBridge.getInstance().getConfig(),foundReason));
+                IntBridge.getInstance().transferStringToBungee(Bukkit.getPlayer(playeruuid), data);
             }
 
             if(clearVl)
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "intave resetvl " + playername);
             if(!executeCommand)
-                e.setCancelled(true);
+                event.setCancelled(true);
         }
-    }*/
+    }
 }
