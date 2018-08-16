@@ -37,6 +37,7 @@ public class PluginMessageListener implements Listener {
                                 .replace("[violation]", violation.toString()))
                 );
                 ViolationManager.addViolation(UUID.fromString(uuid), violation);
+                ProxyServer.getInstance().broadcast("FLAGGAGAGA");
             }
         }
     }

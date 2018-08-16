@@ -18,22 +18,17 @@ public class Configuration {
     @Getter
     File file;
     @Getter
-    net.md_5.bungee.config.Configuration config;
+    private static net.md_5.bungee.config.Configuration config;
     @Getter
     private static Configuration configuration;
 
 
     public Configuration()
     {
+        System.out.println("DEBUG------------------------------");
         try
         {
             this.file = new File(IntBridge.getInstance().getDataFolder(), "bungeecord-config.yml");
-            this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-
-            if (!IntBridge.getInstance().getDataFolder().exists())
-                IntBridge.getInstance().getDataFolder().mkdir();
-
-            File file = new File(IntBridge.getInstance().getDataFolder(), "config.yml");
 
 
             if (!file.exists())
@@ -42,11 +37,11 @@ public class Configuration {
                 Files.copy(in, file.toPath());
                 in.close();
             }
+            this.config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        configuration = this;
     }
 }

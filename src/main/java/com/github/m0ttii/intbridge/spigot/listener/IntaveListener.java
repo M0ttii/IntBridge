@@ -15,12 +15,27 @@ import java.util.stream.Collectors;
  * Created by Jpx3 on 02.06.2018.
  */
 
+<<<<<<< HEAD
 public class IntaveListener implements Listener {
     @EventHandler
+=======
+public class IntaveListener implements Listener
+{
+    @EventHandler
+<<<<<<< HEAD
+    public void on(final AsyncIntaveCommandTriggerEvent event)
+=======
+>>>>>>> 4943fe1debeabb095890902588397fa4267a627e
     public void on(final AsyncIntaveCommandTriggerEvent e)
+>>>>>>> bd49e162d30be782d0c2fc71aae4c6f26fdba991
     {
+<<<<<<< HEAD
         final Player player = e.getPlayer();
         String unparsedCommand = e.getCommand();
+=======
+        final Player p = event.getPlayer();
+        String unparsedCommand = event.getCommand();
+>>>>>>> 4943fe1debeabb095890902588397fa4267a627e
 
         if(unparsedCommand.startsWith("/"))
             unparsedCommand = unparsedCommand.replaceFirst("/", "");
@@ -44,14 +59,19 @@ public class IntaveListener implements Listener {
 
             if(foundReason.length() > 1)
             {
+<<<<<<< HEAD
                 final String data = playeruuid.toString() + ":" + ConfigHelper.getPointsForKickReason(IntBridge.getInstance().getConfig(),foundReason);
                 IntBridge.getInstance().transferStringToBungee(player, data);
+=======
+                final String data = String.valueOf(ConfigHelper.getPointsForKickReason(IntBridge.getInstance().getConfig(),foundReason));
+                IntBridge.getInstance().transferStringToBungee(Bukkit.getPlayer(playeruuid), data);
+>>>>>>> 4943fe1debeabb095890902588397fa4267a627e
             }
 
             if(clearVl)
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "intave resetvl " + playername);
             if(!executeCommand)
-                e.setCancelled(true);
+                event.setCancelled(true);
         }
     }
 }

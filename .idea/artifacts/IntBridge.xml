@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="IntBridge">
+    <output-path>$PROJECT_DIR$/out/artifacts/IntBridge</output-path>
+    <root id="archive" name="IntBridge.jar">
+      <element id="module-output" name="IntBridge" />
+    </root>
+  </artifact>
+</component>

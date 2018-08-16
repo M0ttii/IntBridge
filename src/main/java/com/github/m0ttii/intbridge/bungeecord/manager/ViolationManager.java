@@ -1,6 +1,7 @@
 package com.github.m0ttii.intbridge.bungeecord.manager;
 
 import com.github.m0ttii.intbridge.bungeecord.IntBridge;
+import net.md_5.bungee.config.Configuration;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -23,6 +24,10 @@ public class ViolationManager {
     public static int getViolation(UUID uuid) {
         if (violationmap.containsKey(uuid)) {
             return Integer.parseInt(String.valueOf(violationmap.get(uuid)));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4943fe1debeabb095890902588397fa4267a627e
         }
         return 0;
     }
@@ -49,7 +54,7 @@ public class ViolationManager {
 
     private static Stream<String> getCommandsAt(final int vl)
     {
-        net.md_5.bungee.config.Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
+        Configuration g = IntBridge.getInstance().getConfig().getSection("pointcommands");
         if(g.contains(String.valueOf(vl)))
             if (g.getString(String.valueOf(vl), "").length() < 2)
                 return g.getStringList(String.valueOf(vl)).stream();
