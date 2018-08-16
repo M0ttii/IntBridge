@@ -13,23 +13,21 @@ import java.util.stream.Stream;
  * Created by Adrian D. on 03.06.2018.
  */
 public class ViolationManager {
-    public static HashMap<UUID, Integer> violationmap = new HashMap<UUID, Integer>;
+    public static HashMap<UUID, Integer> violationmap = new HashMap<UUID, Integer>();
 
     public static void addViolation(UUID uuid, Integer violation)
     {
         violationmap.put(uuid, violation);
     }
 
-    public static int getViolation(UUID uuid)
-    {
-        if(violationmap.containsKey(uuid)){
+    public static int getViolation(UUID uuid) {
+        if (violationmap.containsKey(uuid)) {
             return Integer.parseInt(String.valueOf(violationmap.get(uuid)));
-
+        }
         return 0;
     }
 
-    public static Stream<String> getCommands(final int oldVL, final int newVL)
-    {
+    public static Stream<String> getCommands(final int oldVL, final int newVL){
         final AtomicReference<Stream<String>> g = new AtomicReference<>(Stream.empty());
 
         IntStream
