@@ -24,10 +24,6 @@ public class ViolationManager {
     public static int getViolation(UUID uuid) {
         if (violationmap.containsKey(uuid)) {
             return Integer.parseInt(String.valueOf(violationmap.get(uuid)));
-<<<<<<< HEAD
-=======
-
->>>>>>> 4943fe1debeabb095890902588397fa4267a627e
         }
         return 0;
     }
